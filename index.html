@@ -1,0 +1,1400 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMDR Emigrant — warm concept</title>
+  <style>
+    :root {
+      --milk: #f8f2e8;
+      --paper: #fffaf2;
+      --sage: #788a68;
+      --sage-soft: #e8eee2;
+      --clay: #c87557;
+      --clay-soft: #f1d8ca;
+      --ink: #2d2b28;
+      --muted: #6f6962;
+      --line: #ded3c5;
+      --blue: #dfe9ee;
+      --pencil: #3a3630;
+      --lavender: #e9ddff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--milk);
+      color: var(--ink);
+      font-family: TildaSans, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      padding: 42px 0 54px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(200, 117, 87, .18), transparent 26%),
+        linear-gradient(120deg, rgba(232, 238, 226, .85), rgba(248, 242, 232, 0) 48%);
+      pointer-events: none;
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 64px;
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--sage);
+      display: grid;
+      place-items: center;
+      color: var(--paper);
+      font-weight: 800;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+      gap: 54px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      max-width: 760px;
+      font-size: clamp(38px, 4.8vw, 62px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .date {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 0 0 34px;
+      color: var(--muted);
+      font-size: clamp(19px, 2vw, 25px);
+    }
+
+    .date strong {
+      color: var(--ink);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 28px;
+      border-radius: 999px;
+      background: var(--clay);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 14px 36px rgba(151, 79, 55, .22);
+    }
+
+    .hero-card {
+      min-height: 500px;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-photo {
+      min-height: 500px;
+      background: url("assets/hero-emigrant-transparent.png") center / contain no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo > * {
+      display: none;
+    }
+
+    .process-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .18;
+      background-image: radial-gradient(rgba(58, 54, 48, .2) 1px, transparent 1px);
+      background-size: 9px 9px;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-photo::after {
+      content: none;
+    }
+
+    /*
+    .process-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .18;
+      background-image: radial-gradient(rgba(58, 54, 48, .2) 1px, transparent 1px);
+      background-size: 9px 9px;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+    */
+
+    .window {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      top: 32px;
+      height: 260px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, #dfe9ee, #f7efe2);
+      border: 4px solid var(--pencil);
+      box-shadow: inset 0 0 0 1px rgba(120, 138, 104, .18);
+      transform: rotate(-1.4deg);
+    }
+
+    .window::before,
+    .window::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 250, 242, .72);
+    }
+
+    .window::before {
+      left: 50%;
+      top: 0;
+      width: 8px;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+
+    .window::after {
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 8px;
+      transform: translateY(-50%);
+    }
+
+    .city {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 20px;
+      height: 82px;
+      background:
+        linear-gradient(to top, rgba(120, 138, 104, .34) 0 36px, transparent 36px),
+        linear-gradient(to top, rgba(200, 117, 87, .28) 0 58px, transparent 58px),
+        linear-gradient(to top, rgba(45, 43, 40, .12) 0 70px, transparent 70px);
+      clip-path: polygon(0 100%, 0 55%, 8% 55%, 8% 34%, 18% 34%, 18% 66%, 29% 66%, 29% 22%, 41% 22%, 41% 60%, 52% 60%, 52% 38%, 64% 38%, 64% 72%, 75% 72%, 75% 28%, 88% 28%, 88% 54%, 100% 54%, 100% 100%);
+      opacity: .9;
+    }
+
+    .traveler {
+      position: absolute;
+      left: 190px;
+      bottom: 122px;
+      width: 142px;
+      height: 210px;
+      z-index: 2;
+      transform: rotate(-2deg);
+    }
+
+    .head {
+      position: absolute;
+      left: 52px;
+      top: 12px;
+      width: 54px;
+      height: 58px;
+      border-radius: 50%;
+      background: #f1c9ad;
+      border: 3px solid var(--pencil);
+      z-index: 3;
+    }
+
+    .head::before,
+    .head::after {
+      content: "";
+      position: absolute;
+      top: 26px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--pencil);
+    }
+
+    .head::before { left: 18px; }
+    .head::after { right: 18px; }
+
+    .mouth {
+      position: absolute;
+      left: 72px;
+      top: 48px;
+      width: 16px;
+      height: 8px;
+      border-bottom: 2px solid var(--pencil);
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    .hair {
+      position: absolute;
+      left: 40px;
+      top: 2px;
+      width: 76px;
+      height: 68px;
+      border-radius: 46% 54% 50% 50%;
+      background: #6a4d3d;
+      clip-path: polygon(8% 100%, 0 34%, 28% 2%, 78% 0, 100% 35%, 91% 100%, 66% 68%, 50% 100%, 32% 64%);
+    }
+
+    .body {
+      position: absolute;
+      left: 34px;
+      top: 74px;
+      width: 88px;
+      height: 98px;
+      border-radius: 34px 34px 18px 18px;
+      background: var(--sage);
+      border: 3px solid var(--pencil);
+      box-shadow: inset 0 -18px rgba(45, 43, 40, .08);
+    }
+
+    .arm {
+      position: absolute;
+      top: 88px;
+      width: 58px;
+      height: 18px;
+      border-radius: 999px;
+      background: #f1c9ad;
+      border: 3px solid var(--pencil);
+    }
+
+    .arm.left { left: 4px; transform: rotate(-24deg); }
+    .arm.right { right: -4px; transform: rotate(26deg); }
+
+    .leg {
+      position: absolute;
+      top: 164px;
+      width: 24px;
+      height: 48px;
+      border-radius: 999px;
+      background: #45413d;
+      border: 3px solid var(--pencil);
+    }
+
+    .leg.left { left: 48px; transform: rotate(5deg); }
+    .leg.right { right: 44px; transform: rotate(-8deg); }
+
+    .suitcase {
+      position: absolute;
+      left: 118px;
+      bottom: 106px;
+      width: 96px;
+      height: 110px;
+      border-radius: 18px;
+      background: #b9876b;
+      border: 3px solid var(--pencil);
+      box-shadow: 12px 20px 36px rgba(67, 56, 42, .1);
+      z-index: 1;
+    }
+
+    .suitcase::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: -20px;
+      width: 40px;
+      height: 26px;
+      border: 4px solid var(--pencil);
+      border-bottom: 0;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .suitcase::after {
+      content: "";
+      position: absolute;
+      left: 17px;
+      right: 17px;
+      top: 48px;
+      border-top: 2px dashed rgba(255, 250, 242, .6);
+    }
+
+    .dog {
+      position: absolute;
+      right: 72px;
+      bottom: 112px;
+      width: 92px;
+      height: 72px;
+      z-index: 2;
+    }
+
+    .dog .dog-body {
+      position: absolute;
+      left: 14px;
+      bottom: 8px;
+      width: 62px;
+      height: 36px;
+      border-radius: 28px 28px 18px 18px;
+      background: #e7c29d;
+      border: 3px solid var(--pencil);
+    }
+
+    .dog .dog-head {
+      position: absolute;
+      right: 0;
+      bottom: 28px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #e7c29d;
+      border: 3px solid var(--pencil);
+    }
+
+    .dog .dog-ear {
+      position: absolute;
+      right: 16px;
+      bottom: 35px;
+      width: 18px;
+      height: 24px;
+      border-radius: 999px;
+      background: #b9876b;
+      border: 2px solid var(--pencil);
+      transform: rotate(18deg);
+    }
+
+    .dog .dog-tail {
+      position: absolute;
+      left: 6px;
+      bottom: 38px;
+      width: 24px;
+      height: 10px;
+      border-radius: 999px;
+      background: #e7c29d;
+      border: 2px solid var(--pencil);
+      transform: rotate(-32deg);
+    }
+
+    .dog .dog-leg {
+      position: absolute;
+      bottom: 0;
+      width: 10px;
+      height: 20px;
+      border-radius: 999px;
+      background: #b9876b;
+      border: 2px solid var(--pencil);
+    }
+
+    .dog .one { left: 28px; }
+    .dog .two { left: 58px; }
+
+    .doc {
+      position: absolute;
+      width: 72px;
+      height: 52px;
+      border-radius: 10px;
+      background: var(--lavender);
+      border: 2px solid var(--pencil);
+      box-shadow: 0 12px 30px rgba(67, 56, 42, .08);
+      color: #7662a8;
+      font-size: 11px;
+      font-weight: 800;
+      font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
+      display: grid;
+      place-items: center;
+      z-index: 3;
+    }
+
+    .doc.passport { left: 38px; top: 48px; transform: rotate(-13deg); }
+    .doc.visa { right: 38px; top: 72px; transform: rotate(12deg); }
+    .doc.work { left: 150px; top: 22px; transform: rotate(7deg); background: #e8eee2; color: var(--sage); }
+    .doc.home { right: 132px; top: 170px; transform: rotate(-8deg); background: #f1d8ca; color: var(--clay); }
+
+    .plant {
+      position: absolute;
+      width: 84px;
+      height: 118px;
+      left: 42px;
+      bottom: 114px;
+    }
+
+    .plant::before {
+      content: "";
+      position: absolute;
+      left: 26px;
+      bottom: 0;
+      width: 34px;
+      height: 42px;
+      border-radius: 0 0 12px 12px;
+      background: var(--clay-soft);
+      border: 1px solid rgba(200, 117, 87, .28);
+    }
+
+    .leaf {
+      position: absolute;
+      width: 44px;
+      height: 24px;
+      border-radius: 100% 0 100% 0;
+      background: var(--sage);
+      opacity: .86;
+      transform-origin: 100% 100%;
+    }
+
+    .leaf.one { left: 0; top: 22px; transform: rotate(-26deg); }
+    .leaf.two { right: 2px; top: 8px; transform: rotate(38deg) scale(.9); }
+    .leaf.three { left: 12px; top: 56px; transform: rotate(-8deg) scale(.78); }
+
+    .cup {
+      position: absolute;
+      right: 56px;
+      bottom: 120px;
+      width: 70px;
+      height: 54px;
+      border-radius: 0 0 24px 24px;
+      background: #fffaf2;
+      border: 1px solid var(--line);
+      box-shadow: 14px 18px 40px rgba(67, 56, 42, .08);
+    }
+
+    .cup::before {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: 12px;
+      width: 28px;
+      height: 26px;
+      border: 7px solid #fffaf2;
+      border-left: 0;
+      border-radius: 0 50% 50% 0;
+    }
+
+    .path {
+      position: absolute;
+      left: 155px;
+      right: 155px;
+      top: 310px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--sage), transparent);
+      opacity: .55;
+    }
+
+    .process-copy {
+      max-width: 980px;
+      margin: 48px auto 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+      gap: 34px;
+      align-items: center;
+      padding: 32px;
+      border-radius: 34px 28px 38px 30px;
+      background: linear-gradient(135deg, #fffaf2, #e8eee2);
+      border: 2px solid rgba(58, 54, 48, .28);
+      transform: rotate(-.3deg);
+    }
+
+    .process-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 22px;
+    }
+
+    .video-block {
+      max-width: 880px;
+      margin: 48px auto 0;
+    }
+
+    .video-block h3 {
+      margin-bottom: 16px;
+    }
+
+    .youtube-frame,
+    .youtube-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--sage-soft), var(--blue));
+      box-shadow: 0 18px 44px rgba(67, 56, 42, .08);
+    }
+
+    .youtube-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .youtube-placeholder {
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+      color: var(--sage);
+      font-weight: 800;
+      font-size: clamp(20px, 2.4vw, 28px);
+    }
+
+    .process-art {
+      min-height: 260px;
+      position: relative;
+    }
+
+    .feelings-cloud {
+      position: absolute;
+      left: 0;
+      top: 28px;
+      width: 210px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .feeling {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #fffaf2;
+      border: 2px solid rgba(58, 54, 48, .24);
+      color: var(--muted);
+      font-size: 13px;
+      box-shadow: 0 8px 20px rgba(67, 56, 42, .06);
+    }
+
+    .soft-arrow {
+      position: absolute;
+      left: 176px;
+      top: 118px;
+      width: 95px;
+      height: 42px;
+      border-top: 3px solid var(--pencil);
+      border-radius: 50%;
+      transform: rotate(8deg);
+    }
+
+    .soft-arrow::after {
+      content: "";
+      position: absolute;
+      right: -3px;
+      top: -8px;
+      width: 14px;
+      height: 14px;
+      border-top: 3px solid var(--pencil);
+      border-right: 3px solid var(--pencil);
+      transform: rotate(42deg);
+    }
+
+    .lighter-person {
+      position: absolute;
+      right: 20px;
+      top: 42px;
+      width: 136px;
+      height: 190px;
+    }
+
+    .lighter-person::before {
+      content: "";
+      position: absolute;
+      left: 47px;
+      top: 0;
+      width: 46px;
+      height: 48px;
+      border-radius: 50%;
+      background: #f1c9ad;
+      border: 3px solid var(--pencil);
+      box-shadow: 0 0 0 16px rgba(120, 138, 104, .16);
+    }
+
+    .lighter-person::after {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: 58px;
+      width: 92px;
+      height: 112px;
+      border-radius: 42px 42px 24px 24px;
+      background: var(--clay);
+      border: 3px solid var(--pencil);
+      box-shadow: inset 0 -18px rgba(255, 250, 242, .16);
+    }
+
+    .light-lines {
+      position: absolute;
+      right: 4px;
+      top: 18px;
+      width: 166px;
+      height: 166px;
+      border-radius: 50%;
+      border: 2px dashed rgba(120, 138, 104, .42);
+    }
+
+    .burden-house {
+      position: absolute;
+      left: 10px;
+      top: 26px;
+      width: 180px;
+      height: 150px;
+      opacity: .78;
+      transform: rotate(-7deg);
+    }
+
+    .burden-house::before {
+      content: "";
+      position: absolute;
+      left: 32px;
+      top: 22px;
+      width: 102px;
+      height: 92px;
+      background: #5d8fb8;
+      clip-path: polygon(50% 0, 100% 38%, 100% 100%, 0 100%, 0 38%);
+      filter: saturate(.85);
+    }
+
+    .burden-house::after {
+      content: "";
+      position: absolute;
+      left: 26px;
+      top: 112px;
+      width: 132px;
+      height: 60px;
+      border-top: 4px solid #5d8fb8;
+      border-left: 4px solid #5d8fb8;
+      transform: skewX(-28deg);
+    }
+
+    .body-loop {
+      position: absolute;
+      right: 6px;
+      top: 0;
+      width: 176px;
+      height: 210px;
+      border: 5px solid var(--pencil);
+      border-radius: 50% 48% 50% 44%;
+      transform: rotate(12deg);
+      opacity: .9;
+    }
+
+    .body-loop::before {
+      content: "";
+      position: absolute;
+      left: 54px;
+      bottom: 22px;
+      width: 60px;
+      height: 34px;
+      border-radius: 50%;
+      border: 4px solid var(--pencil);
+      background: #f1c9ad;
+    }
+
+    .testimonials {
+      background: var(--paper);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .review-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      background: #fffdf7;
+      box-shadow: 0 12px 34px rgba(67, 56, 42, .06);
+    }
+
+    .quote {
+      font-size: 22px;
+      line-height: 1.4;
+    }
+
+    .review-meta {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 22px;
+    }
+
+    .video-placeholder {
+      min-height: 260px;
+      border: 1px dashed rgba(120, 138, 104, .55);
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--sage);
+      background: var(--sage-soft);
+      padding: 24px;
+      font-weight: 700;
+    }
+
+    .review-video {
+      min-height: 260px;
+      aspect-ratio: auto;
+      border-radius: 24px;
+      box-shadow: none;
+    }
+
+    .note {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      background: rgba(255, 250, 242, .92);
+      border: 1px solid rgba(222, 211, 197, .9);
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    section {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.38;
+    }
+
+    .intro strong {
+      background: linear-gradient(transparent 58%, var(--clay-soft) 58%);
+    }
+
+    .check-in {
+      background: linear-gradient(135deg, var(--sage-soft), var(--blue));
+    }
+
+    .check-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
+      padding: 34px;
+      border: 1px solid rgba(222, 211, 197, .85);
+      border-radius: 28px;
+      background: rgba(255, 250, 242, .82);
+      box-shadow: 0 18px 44px rgba(67, 56, 42, .08);
+    }
+
+    .check-card h2 {
+      margin-bottom: 16px;
+      max-width: 760px;
+    }
+
+    .check-card p {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    .check-card .button {
+      white-space: nowrap;
+      background: var(--sage);
+      box-shadow: 0 14px 34px rgba(80, 98, 68, .18);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: 58px;
+      align-items: start;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 22px;
+    }
+
+    .symptoms {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .pill {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      font-size: 18px;
+      box-shadow: 0 10px 30px rgba(67, 56, 42, .05);
+    }
+
+    .icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--sage-soft);
+      color: var(--sage);
+      font-weight: 800;
+    }
+
+    .emdr-band {
+      background: var(--paper);
+    }
+
+    .method {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .step {
+      min-height: 230px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px;
+      background: linear-gradient(180deg, #fffdf7, #f4ece0);
+      position: relative;
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--clay);
+      color: white;
+      font-weight: 800;
+      margin-bottom: 38px;
+    }
+
+    .step-line {
+      height: 48px;
+      border: 2px solid var(--sage);
+      border-left: 0;
+      border-right: 0;
+      opacity: .45;
+      margin: 0 0 24px;
+      border-radius: 50%;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .trust {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .person {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+    }
+
+    .person-head {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: 50% 34%;
+      border: 8px solid var(--sage-soft);
+    }
+
+    .kate-avatar {
+      transform: scale(1.06);
+    }
+
+    .avatar-bg {
+      width: 132px;
+      height: 132px;
+      flex: 0 0 132px;
+      border-radius: 50%;
+      border: 8px solid var(--sage-soft);
+      background-size: 225%;
+      background-position: 53% 38%;
+      background-repeat: no-repeat;
+      box-shadow: 0 10px 28px rgba(67, 56, 42, .1);
+    }
+
+    h3 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .role {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .person p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .price {
+      background: linear-gradient(135deg, var(--sage-soft), var(--blue));
+    }
+
+    .price-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 34px;
+      align-items: center;
+      background: rgba(255, 250, 242, .82);
+      border: 1px solid rgba(222, 211, 197, .85);
+      border-radius: 28px;
+      padding: 34px;
+    }
+
+    .price-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .price-note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .euro {
+      font-size: 76px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--sage);
+    }
+
+    .old {
+      display: inline-block;
+      margin-left: 14px;
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 32px;
+      vertical-align: middle;
+    }
+
+    .prepare {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .prepare-title {
+      margin: 28px 0 0;
+      color: var(--ink);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .prepare div {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--muted);
+    }
+
+    .faq {
+      display: grid;
+      gap: 18px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    details {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px 24px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    details p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .footer {
+      padding: 80px 0;
+      text-align: center;
+      background: var(--sage);
+      color: var(--paper);
+    }
+
+    .footer h2 {
+      max-width: 760px;
+      margin: 0 auto 28px;
+    }
+
+    .footer-question {
+      max-width: 680px;
+      margin: 0 auto 20px;
+      color: rgba(255, 250, 242, .9);
+      font-size: 22px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 0 0 32px;
+    }
+
+    .social-links a {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 250, 242, .48);
+      color: var(--paper);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer .button {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .two-col,
+      .trust,
+      .check-card,
+      .price-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .topline {
+        margin-bottom: 34px;
+      }
+
+      .hero-photo {
+        min-height: 360px;
+      }
+
+      .symptoms,
+      .method,
+      .prepare,
+      .process-copy,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="wrap">
+        <div class="topline">
+          <div class="brand"><span class="mark">E</span> EMDR Emigrant</div>
+          <div>Онлайн / 14:00 (GMT+2)</div>
+        </div>
+        <div class="hero-grid">
+          <div>
+            <h1>Групповая EMDR-сессия по преодолению стресса адаптации в новой стране</h1>
+            <div class="date"><strong>13 июня 2026</strong><span>/</span><span>Онлайн</span><span>/</span><span>14:00 (GMT+2)</span></div>
+            <a class="button" href="#price">Присоединиться</a>
+          </div>
+          <div class="hero-card">
+            <div class="hero-photo"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="intro">
+          Эмигранты, беженцы и переселенцы.. все мы испытываем <strong>стресс адаптации.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="check-in">
+      <div class="wrap">
+        <div class="check-card">
+          <div>
+            <h2>Опрос</h2>
+            <p>Опрос поможет исследовать, где сейчас больше напряжения: в тоске по дому, ощущении потери опоры или контакте с местными жителями страны.</p>
+          </div>
+          <a class="button" href="cultural-shock-questionnaire.html">Пройти опросник</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap two-col">
+        <div>
+          <h2>Что это?</h2>
+          <p class="lead">Реакция на события жизни в эмиграции, когда происходящее превышает возможности нашей психики справляться с трудными переживаниями.</p>
+        </div>
+        <div class="symptoms">
+          <div class="pill"><span class="icon">01</span>бытовая перегрузка (документы, жильё, медицина)</div>
+          <div class="pill"><span class="icon">02</span>языковая усталость</div>
+          <div class="pill"><span class="icon">03</span>ощущение одиночества</div>
+          <div class="pill"><span class="icon">04</span>культурные несостыковки</div>
+          <div class="pill"><span class="icon">05</span>финансовая нестабильность</div>
+          <div class="pill"><span class="icon">06</span>потеря привычной роли и идентичности</div>
+          <div class="pill"><span class="icon">07</span>телесное напряжение и проблемы со сном</div>
+          <div class="pill"><span class="icon">08</span>чувство ностальгии по своей стране и дому</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="emdr-band">
+      <div class="wrap">
+        <div class="two-col">
+          <div>
+            <h2>Участие в EMDR-сессии поможет обрести большую устойчивость</h2>
+          </div>
+          <div>
+            <p class="lead">по отношению к трудному опыту, с которым мы сталкиваемся во время эмиграции.</p>
+            <p class="lead">Сессия регулярная, один раз в месяц, каждую последнюю субботу месяца. Продолжительность 2 часа.</p>
+          </div>
+        </div>
+        <div class="method">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-line"></div>
+            <p>EMDR (Eye Movement Desensitization and Reprocessing)</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-line"></div>
+            <p>Это один из самых доказанных методов терапии для психического здоровья.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-line"></div>
+            <p>Рекомендован ВОЗ, Американской психиатрической ассоциацией и другими.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-line"></div>
+            <p>Наша групповая сессия основана на психотерапии EMDR, но при этом не является психотерапевтической сессией.</p>
+          </div>
+        </div>
+        <div class="process-copy">
+          <p>У нас в психике накапливаются ощущения стресса, тяжести, выгорания, усталости, разочарования, грусти, боли и так далее. С помощью EMDR мы перерабатываем все эти чувства для того, чтобы вам было легче справляться со всеми вызовами эмиграции.</p>
+          <div class="process-art">
+            <div class="burden-house"></div>
+            <div class="feelings-cloud">
+              <span class="feeling">стресс</span>
+              <span class="feeling">тяжесть</span>
+              <span class="feeling">выгорание</span>
+              <span class="feeling">усталость</span>
+              <span class="feeling">грусть</span>
+              <span class="feeling">боль</span>
+            </div>
+            <div class="soft-arrow"></div>
+            <div class="light-lines"></div>
+            <div class="body-loop"></div>
+            <div class="lighter-person"></div>
+          </div>
+        </div>
+        <div class="video-block">
+          <h3>Видео о EMDR</h3>
+          <div class="youtube-placeholder">Сюда можно вставить YouTube-видео</div>
+          <!-- Когда будет ссылка, замените блок выше на:
+          <div class="youtube-frame">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Видео о EMDR" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          -->
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="trust">
+          <article class="person">
+            <div class="person-head">
+              <div class="avatar-bg" style="background-image: url('https://optim.tildacdn.net/tild3431-3065-4333-b138-663932333038/-/cover/700x700/center/center/-/format/webp/photo_2026-05-08_175.jpeg.webp')" aria-label="Олег Хухлаев"></div>
+              <div>
+                <h3>Олег Хухлаев</h3>
+                <div class="role">психотерапевт, специалист по психологии миграции и волонтер «Ковчега».</div>
+              </div>
+            </div>
+            <p>20 лет я совмещаю роль психолога-практика и исследователя в области социальной психологии. Культурные различия, идентичность, эмиграция – это все темы с которыми я работаю не только как практик, но и знаком с «матчастью».</p>
+            <p>Работа с беженцами, детьми-жертвами военных конфликтов: я понимаю эти темы и как психотерапевт и как организатор системы психологической помощи.</p>
+          </article>
+          <article class="person">
+            <div class="person-head">
+              <img class="avatar kate-avatar" src="https://optim.tildacdn.net/tild3664-6664-4338-b264-383039633663/-/cover/700x700/center/center/-/format/webp/Screenshot_2025-11-1.png.webp" alt="">
+              <div>
+                <h3>Катерина Рахманова</h3>
+                <div class="role">Исследователь / психотерапевт / автор</div>
+              </div>
+            </div>
+            <p>Работает в методах EMDR и IFS. Магистратура по психологии (MSc Psychology, University of London), член Британского Психологического Сообщества. В настоящее время учится на докторантуре по психотерапии в Лондоне.</p>
+            <p>Жила 20 лет в Москве, 10 лет в Киеве, 2 — в Берлине, 2 — в Лондоне. В этом мероприятии выступает как помощник-организатор и ценитель данного метода (с позиции терапевта и клиента).</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="wrap">
+        <h2>Отзывы</h2>
+        <div class="reviews-grid">
+          <article class="review-card">
+            <div class="quote">«Спасибо, спасибо. Было очень бережно и спокойно.»</div>
+            <div class="review-meta">участница групповой сессии</div>
+          </article>
+          <article class="review-card">
+            <div class="quote">«После встречи стало легче дышать и яснее понимать, что со мной происходит.»</div>
+            <div class="review-meta">отзыв можно заменить на реальный текст</div>
+          </article>
+          <div class="youtube-placeholder review-video">Сюда можно вставить YouTube-видеоотзыв</div>
+          <!-- Когда будет ссылка на видеоотзыв, замените блок выше на:
+          <div class="youtube-frame review-video">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Видеоотзыв" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          -->
+        </div>
+      </div>
+    </section>
+
+    <section class="price" id="price">
+      <div class="wrap">
+        <div class="price-card">
+          <div>
+            <h2>Стоимость</h2>
+            <p class="lead">13 июня 2026 / Онлайн / 14:00 (GMT+2)</p>
+            <div class="price-actions">
+              <a class="button" href="PAYMENT_LINK_HERE" target="_blank" rel="noreferrer">Оплатить</a>
+            </div>
+            <p class="price-note">После оплаты мы пришлем ссылку на Zoom и подготовительный PDF на почту.</p>
+          </div>
+          <div class="euro">€ 50 <span class="old">€70</span></div>
+        </div>
+        <p class="prepare-title">Что взять с собой:</p>
+        <div class="prepare">
+          <div>стакан питьевой воды и салфетки</div>
+          <div>три листа А4</div>
+          <div>карандаши или ручка</div>
+          <div>распечатанный pdf-файл, который мы пришлем вам на почту</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap faq">
+        <details open>
+          <summary>Как проходит сессия?</summary>
+          <p>Вы подключаетесь к зуму, и начинается работа. Вам не нужно ничего рассказывать, вы можете быть анонимны, с выключенной камерой. Вы можете писать в чат и задавать вопросы, при желании. Это групповая работа над индивидуальными запросами. То есть мы находимся вместе, но каждый работает с собой над своими процессами.</p>
+        </details>
+        <details>
+          <summary>Кому это подходит?</summary>
+          <p>Всем тем, кто столкнулся с эмиграцией или беженством, и ощущает какие-то сложности. Это может быть тоска по родному городу, ностальгия, грусть, сложности в адаптации в новом месте, раздражение на людей вокруг, одиночество, злость, отторжение, непринятие, томительное ожидание. Эти эмоции могут появляться эпизодически, не постоянно, но всё равно негативно влиять на качество жизни. Групповая сессия может с этим помочь.</p>
+        </details>
+        <details>
+          <summary>Что нужно иметь с собой?</summary>
+          <p>— стакан питьевой воды и салфетки<br>— три листа А4<br>— карандаши или ручка<br>— распечатанный pdf-файл, который мы пришлем вам на почту</p>
+        </details>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="wrap">
+        <p class="footer-question">Если у вас есть какие-то вопросы, пишите нам.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noreferrer">Instagram Катерины</a>
+          <a href="https://www.instagram.com/OLEG_INSTAGRAM" target="_blank" rel="noreferrer">Instagram Олега</a>
+        </div>
+        <h2>До встречи!</h2>
+        <a class="button" href="#price">Присоединиться</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

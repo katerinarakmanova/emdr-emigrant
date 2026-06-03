@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Опросник культурного шока</title>
+    <style>
+      :root {
+        --milk: #f8f2e8;
+        --paper: #fffaf2;
+        --sage: #788a68;
+        --sage-soft: #e8eee2;
+        --clay: #c87557;
+        --clay-soft: #f1d8ca;
+        --ink: #2d2b28;
+        --muted: #6f6962;
+        --line: #ded3c5;
+        --blue: #dfe9ee;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--milk);
+        color: var(--ink);
+        font-family: TildaSans, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        line-height: 1.55;
+      }
+
+      .page {
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .hero {
+        padding: 54px 20px 34px;
+        border-bottom: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 84% 16%, rgba(200, 117, 87, .18), transparent 26%),
+          linear-gradient(120deg, rgba(232, 238, 226, .9), rgba(248, 242, 232, 0) 54%);
+      }
+
+      .wrap {
+        width: min(1040px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 42px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        color: var(--ink);
+      }
+
+      .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--sage);
+        color: var(--paper);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+        gap: 34px;
+        align-items: end;
+      }
+
+      h1 {
+        margin: 0 0 22px;
+        max-width: 780px;
+        font-size: clamp(38px, 5vw, 64px);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 680px;
+        color: var(--muted);
+        font-size: clamp(19px, 2vw, 24px);
+      }
+
+      .soft-card {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 24px;
+        background: rgba(255, 250, 242, .78);
+        box-shadow: 0 18px 44px rgba(67, 56, 42, .08);
+      }
+
+      .soft-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 22px;
+      }
+
+      .soft-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .questionnaire {
+        padding: 54px 0 80px;
+      }
+
+      .progress-shell {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: 14px 0;
+        background: rgba(248, 242, 232, .92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(222, 211, 197, .65);
+      }
+
+      .progress-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .bar {
+        height: 12px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: var(--sage-soft);
+      }
+
+      .bar span {
+        display: block;
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--sage), var(--clay));
+        transition: width .25s ease;
+      }
+
+      .counter {
+        color: var(--muted);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .questions {
+        display: grid;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .question-card {
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 24px;
+        background: var(--paper);
+        box-shadow: 0 12px 34px rgba(67, 56, 42, .05);
+      }
+
+      .question-head {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 16px;
+        align-items: start;
+        margin-bottom: 18px;
+      }
+
+      .number {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        background: var(--sage-soft);
+        color: var(--sage);
+        font-weight: 900;
+      }
+
+      .question-text {
+        margin: 0;
+        font-size: clamp(20px, 2.2vw, 26px);
+        line-height: 1.28;
+      }
+
+      .scale {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .choice {
+        min-height: 76px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 12px 10px;
+        background: #fffdf7;
+        color: var(--muted);
+        cursor: pointer;
+        font: inherit;
+        transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+      }
+
+      .choice:hover {
+        transform: translateY(-1px);
+        border-color: rgba(200, 117, 87, .5);
+      }
+
+      .choice.is-selected {
+        border-color: var(--clay);
+        background: var(--clay-soft);
+        color: var(--ink);
+        box-shadow: 0 10px 24px rgba(200, 117, 87, .14);
+      }
+
+      .choice b {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+        font-size: 20px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 32px;
+      }
+
+      .button {
+        min-height: 56px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 999px;
+        padding: 0 28px;
+        background: var(--clay);
+        color: white;
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 14px 36px rgba(151, 79, 55, .22);
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--sage);
+        border: 1px solid rgba(120, 138, 104, .45);
+        box-shadow: none;
+      }
+
+      .result {
+        display: none;
+        margin-top: 34px;
+        border: 1px solid rgba(120, 138, 104, .35);
+        border-radius: 32px;
+        padding: clamp(24px, 4vw, 40px);
+        background: linear-gradient(135deg, #fffaf2, #e8eee2);
+      }
+
+      .result.is-visible {
+        display: block;
+      }
+
+      .result-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: center;
+        margin-bottom: 22px;
+      }
+
+      .score {
+        width: 138px;
+        height: 138px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 10px solid var(--sage-soft);
+        color: var(--sage);
+        font-size: 42px;
+        font-weight: 900;
+      }
+
+      .result h2 {
+        margin: 0 0 12px;
+        font-size: clamp(30px, 4vw, 48px);
+        line-height: 1.08;
+      }
+
+      .result p {
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      .note {
+        margin-top: 24px;
+        border-left: 5px solid var(--clay);
+        padding: 18px 20px;
+        border-radius: 18px;
+        background: rgba(255, 250, 242, .74);
+        color: var(--muted);
+      }
+
+      .note strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--ink);
+        font-size: 20px;
+      }
+
+      .note a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        margin-top: 14px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: var(--sage);
+        color: var(--paper);
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      @media (max-width: 760px) {
+        .hero-grid,
+        .result-top {
+          grid-template-columns: 1fr;
+        }
+
+        .scale {
+          grid-template-columns: 1fr;
+        }
+
+        .choice {
+          min-height: 58px;
+          text-align: left;
+        }
+
+        .result-top .score {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div class="wrap">
+          <div class="topline">
+            <div class="brand"><span class="mark">?</span> Cultural Shock Check-in</div>
+            <div>3-5 минут / 12 вопросов</div>
+          </div>
+          <div class="hero-grid">
+            <div>
+              <h1>Оцените, как вы переживаете адаптацию в новой стране</h1>
+              <p class="lead">Опросник поможет исследовать, где сейчас больше напряжения: в тоске по дому, ощущении потери опоры или в контакте с местными жителями. И что с этим можно сделать.</p>
+            </div>
+            <aside class="soft-card">
+              <strong>Как отвечать</strong>
+              <p>Выберите один вариант для каждого утверждения. Здесь нет правильных ответов, есть только ваше текущее состояние.</p>
+            </aside>
+          </div>
+        </div>
+      </header>
+
+      <section class="progress-shell" aria-label="Прогресс заполнения">
+        <div class="wrap progress-row">
+          <div class="bar"><span id="progressBar"></span></div>
+          <div class="counter"><span id="answeredCount">0</span>/12</div>
+        </div>
+      </section>
+
+      <section class="questionnaire">
+        <div class="wrap">
+          <form id="quiz" class="questions"></form>
+          <div class="actions">
+            <button class="button" id="showResult" type="button">Показать результат</button>
+            <button class="button secondary" id="resetQuiz" type="button">Начать заново</button>
+          </div>
+          <section class="result" id="result" aria-live="polite">
+            <div class="result-top">
+              <div>
+                <h2 id="resultTitle">Ваш результат</h2>
+                <p id="resultText"></p>
+              </div>
+              <div class="score"><span id="scoreValue">0</span></div>
+            </div>
+            <div class="note" id="supportText"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const questions = [
+        "Я чувствую, что мне трудно приспособиться к новой стране",
+        "Я очень скучаю по своим родителям и друзьям, которые остались на родине",
+        "Я чувствую, что местные не принимают меня в свое общество",
+        "У меня бывает желание уехать из новой страны и вернуться домой",
+        "Я чувствую, что не понимаю, кто я и каково мое место в новой стране",
+        "Некоторые вещи, происходящие в новой стране, отвратительны для меня и приводят меня в ужас",
+        "Я чувствую себя беспомощным и бессильным в попытках приспособиться к новой стране",
+        "Я чувствую тревогу и неуверенность, когда мне приходится общаться с местными жителями",
+        "При общении с местными жителями мне трудно понять их жесты и выражение лица",
+        "Я чувствую себя неловко, когда местные жители смотрят на меня",
+        "Когда я что-то покупаю, мне кажется, что местные жители пытаются обмануть меня",
+        "Мне трудно быть вежливым с местными жителями"
+      ];
+
+      const choices = [
+        { value: 1, label: "Полностью не согласен" },
+        { value: 2, label: "Скорее не согласен" },
+        { value: 3, label: "В чем-то да, в чем-то нет" },
+        { value: 4, label: "Скорее согласен" },
+        { value: 5, label: "Полностью согласен" }
+      ];
+
+      const answers = new Map();
+      const quiz = document.querySelector("#quiz");
+      const progressBar = document.querySelector("#progressBar");
+      const answeredCount = document.querySelector("#answeredCount");
+      const result = document.querySelector("#result");
+
+      function renderQuestions() {
+        quiz.innerHTML = questions.map((question, index) => `
+          <article class="question-card" data-question="${index}">
+            <div class="question-head">
+              <div class="number">${index + 1}</div>
+              <p class="question-text">${question}</p>
+            </div>
+            <div class="scale" role="group" aria-label="Ответ на вопрос ${index + 1}">
+              ${choices.map(choice => `
+                <button class="choice" type="button" data-value="${choice.value}" aria-pressed="false">
+                  <b>${choice.value}</b>${choice.label}
+                </button>
+              `).join("")}
+            </div>
+          </article>
+        `).join("");
+      }
+
+      function updateProgress() {
+        const count = answers.size;
+        answeredCount.textContent = count;
+        progressBar.style.width = `${(count / questions.length) * 100}%`;
+      }
+
+      function interpret(score) {
+        if (score < 1.75) {
+          return {
+            title: "Ниже среднего уровня культурного шока",
+            text: "Скорее всего, вы достаточно хорошо ориентируетесь в новой среде и чувствуете себя сравнительно устойчиво. Трудности могут возникать, но, похоже, вы находите способы с ними справляться.",
+          };
+        }
+        if (score <= 3.27) {
+          return {
+            title: "Средний уровень культурного шока",
+            text: "Вы справляетесь с адаптацией, но не без напряжения. Некоторые ситуации могут вызывать стрессовую реакцию, и здесь особенно важно не оставаться с этим в одиночку.",
+          };
+        }
+        return {
+          title: "Выше среднего уровня культурного шока",
+          text: "Похоже, сейчас вам может быть по-настоящему тяжело в новой стране. Адаптация и общение с местными могут забирать много сил. Это не значит, что с вами что-то не так: это сигнал, что поддержка сейчас особенно важна.",
+        };
+      }
+
+      quiz.addEventListener("click", (event) => {
+        const button = event.target.closest(".choice");
+        if (!button) return;
+        const card = button.closest(".question-card");
+        const questionIndex = Number(card.dataset.question);
+        const value = Number(button.dataset.value);
+        answers.set(questionIndex, value);
+        card.querySelectorAll(".choice").forEach(choice => {
+          choice.classList.toggle("is-selected", choice === button);
+          choice.setAttribute("aria-pressed", choice === button ? "true" : "false");
+        });
+        updateProgress();
+      });
+
+      document.querySelector("#showResult").addEventListener("click", () => {
+        if (answers.size < questions.length) {
+          const firstMissing = [...document.querySelectorAll(".question-card")].find(card => !answers.has(Number(card.dataset.question)));
+          firstMissing?.scrollIntoView({ behavior: "smooth", block: "center" });
+          firstMissing?.animate([{ transform: "translateX(0)" }, { transform: "translateX(8px)" }, { transform: "translateX(0)" }], { duration: 260 });
+          return;
+        }
+        const total = [...answers.values()].reduce((sum, value) => sum + value, 0);
+        const score = total / questions.length;
+        const rounded = score.toFixed(2);
+        const copy = interpret(score);
+        document.querySelector("#scoreValue").textContent = rounded;
+        document.querySelector("#resultTitle").textContent = copy.title;
+        document.querySelector("#resultText").textContent = `Ваш средний балл: ${rounded}. ${copy.text}`;
+        document.querySelector("#supportText").innerHTML = `
+          <strong>Что можно сделать дальше</strong>
+          Переработать эту часть напряжения вашего опыта можно в EMDR-терапии. Она помогает снизить эмоциональное напряжение и стресс, чтобы больше сил оставалось на адаптацию в новой стране, отношения, работу и то, что для вас действительно важно и ценно. Если вам откликается такой формат, вы можете присоединиться к групповой EMDR-сессии.
+          <br>
+          <a href="index.html">Перейти к описанию EMDR-сессии</a>
+        `;
+        result.classList.add("is-visible");
+        result.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      document.querySelector("#resetQuiz").addEventListener("click", () => {
+        answers.clear();
+        document.querySelectorAll(".choice").forEach(choice => {
+          choice.classList.remove("is-selected");
+          choice.setAttribute("aria-pressed", "false");
+        });
+        result.classList.remove("is-visible");
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      renderQuestions();
+      updateProgress();
+    </script>
+  </body>
+</html>
