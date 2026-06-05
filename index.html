@@ -797,9 +797,18 @@
       border-bottom: 1px solid var(--line);
     }
 
+    .intro-section {
+      background: linear-gradient(135deg, var(--sage-soft), var(--blue));
+    }
+
     .intro {
       max-width: 780px;
       margin: 0 auto;
+      padding: 34px;
+      border: 1px solid rgba(222, 211, 197, .85);
+      border-radius: 28px;
+      background: rgba(255, 250, 242, .82);
+      box-shadow: 0 18px 44px rgba(67, 56, 42, .08);
       font-size: clamp(24px, 3vw, 36px);
       line-height: 1.38;
     }
@@ -897,48 +906,19 @@
       background: var(--paper);
     }
 
-    .method {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
+    .emdr-process-image {
       margin-top: 34px;
-    }
-
-    .step {
-      min-height: 230px;
+      border-radius: 30px;
+      overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 22px;
-      background: linear-gradient(180deg, #fffdf7, #f4ece0);
-      position: relative;
+      background: var(--milk);
+      box-shadow: 0 18px 44px rgba(67, 56, 42, .08);
     }
 
-    .step-num {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--clay);
-      color: white;
-      font-weight: 800;
-      margin-bottom: 38px;
-    }
-
-    .step-line {
-      height: 48px;
-      border: 2px solid var(--sage);
-      border-left: 0;
-      border-right: 0;
-      opacity: .45;
-      margin: 0 0 24px;
-      border-radius: 50%;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 17px;
+    .emdr-process-image img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .trust {
@@ -1161,7 +1141,6 @@
       }
 
       .symptoms,
-      .method,
       .prepare,
       .process-copy,
       .reviews-grid {
@@ -1191,22 +1170,10 @@
       </div>
     </header>
 
-    <section>
+    <section class="intro-section">
       <div class="wrap">
         <div class="intro">
           Эмигранты, беженцы и переселенцы.. все мы испытываем <strong>стресс адаптации.</strong>
-        </div>
-      </div>
-    </section>
-
-    <section class="check-in">
-      <div class="wrap">
-        <div class="check-card">
-          <div>
-            <h2>Опрос</h2>
-            <p>Опрос поможет исследовать, где сейчас больше напряжения: в тоске по дому, ощущении потери опоры или контакте с местными жителями страны.</p>
-          </div>
-          <a class="button" href="cultural-shock-questionnaire.html">Пройти опросник</a>
         </div>
       </div>
     </section>
@@ -1230,65 +1197,38 @@
       </div>
     </section>
 
-    <section class="emdr-band">
+    <section class="check-in">
+      <div class="wrap">
+        <div class="check-card">
+          <div>
+            <h2>Опрос</h2>
+            <p>Опрос поможет исследовать, где сейчас больше напряжения: в тоске по дому, ощущении потери опоры или контакте с местными жителями страны.</p>
+          </div>
+          <a class="button" href="cultural-shock-questionnaire.html">Пройти опросник</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="emdr-band" id="emdr-support">
       <div class="wrap">
         <div class="two-col">
           <div>
             <h2>Участие в EMDR-сессии поможет обрести большую устойчивость</h2>
           </div>
           <div>
-            <p class="lead">по отношению к трудному опыту, с которым мы сталкиваемся во время эмиграции.</p>
-            <p class="lead">Сессия регулярная, один раз в месяц, каждую последнюю субботу месяца. Продолжительность 2 часа.</p>
+            <h3>Как именно?</h3>
+            <p class="lead">У нас в психике накапливаются ощущения стресса, тяжести, выгорания, усталости, разочарования, грусти, боли и так далее. Они сохраняются там.</p>
+            <p class="lead">С помощью билатеральной стимуляции (движения глаз и рук) мы перерабатываем все эти чувства. Когда этот груз снят, вам легче справляться со всеми вызовами эмиграции.</p>
           </div>
         </div>
-        <div class="method">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-line"></div>
-            <p>EMDR (Eye Movement Desensitization and Reprocessing)</p>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-line"></div>
-            <p>Это один из самых доказанных методов терапии для психического здоровья.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-line"></div>
-            <p>Рекомендован ВОЗ, Американской психиатрической ассоциацией и другими.</p>
-          </div>
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-line"></div>
-            <p>Наша групповая сессия основана на психотерапии EMDR, но при этом не является психотерапевтической сессией.</p>
-          </div>
-        </div>
-        <div class="process-copy">
-          <p>У нас в психике накапливаются ощущения стресса, тяжести, выгорания, усталости, разочарования, грусти, боли и так далее. С помощью EMDR мы перерабатываем все эти чувства для того, чтобы вам было легче справляться со всеми вызовами эмиграции.</p>
-          <div class="process-art">
-            <div class="burden-house"></div>
-            <div class="feelings-cloud">
-              <span class="feeling">стресс</span>
-              <span class="feeling">тяжесть</span>
-              <span class="feeling">выгорание</span>
-              <span class="feeling">усталость</span>
-              <span class="feeling">грусть</span>
-              <span class="feeling">боль</span>
-            </div>
-            <div class="soft-arrow"></div>
-            <div class="light-lines"></div>
-            <div class="body-loop"></div>
-            <div class="lighter-person"></div>
-          </div>
+        <div class="emdr-process-image">
+          <img src="assets/emdr-process-visual-transparent.png" alt="Визуальная схема переработки эмоционального напряжения с помощью EMDR">
         </div>
         <div class="video-block">
           <h3>Видео о EMDR</h3>
-          <div class="youtube-placeholder">Сюда можно вставить YouTube-видео</div>
-          <!-- Когда будет ссылка, замените блок выше на:
           <div class="youtube-frame">
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Видео о EMDR" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/QGiqBazdPGw" title="Видео о EMDR" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          -->
         </div>
       </div>
     </section>
@@ -1351,7 +1291,7 @@
             <h2>Стоимость</h2>
             <p class="lead">13 июня 2026 / Онлайн / 14:00 (GMT+2)</p>
             <div class="price-actions">
-              <a class="button" href="PAYMENT_LINK_HERE" target="_blank" rel="noreferrer">Оплатить</a>
+              <a class="button" href="https://buy.stripe.com/9B628q0yx48x7k04jpdQQ0c" target="_blank" rel="noreferrer">Оплатить</a>
             </div>
             <p class="price-note">После оплаты мы пришлем ссылку на Zoom и подготовительный PDF на почту.</p>
           </div>
