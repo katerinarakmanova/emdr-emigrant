@@ -823,14 +823,16 @@
 
     .check-card {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: 150px minmax(0, 1fr) auto;
       gap: 28px;
       align-items: center;
       padding: 34px;
-      border: 1px solid rgba(222, 211, 197, .85);
-      border-radius: 28px;
-      background: rgba(255, 250, 242, .82);
-      box-shadow: 0 18px 44px rgba(67, 56, 42, .08);
+    }
+
+    .check-illustration {
+      width: 150px;
+      max-height: 190px;
+      object-fit: contain;
     }
 
     .check-card h2 {
@@ -1055,27 +1057,6 @@
       margin: 0 auto;
     }
 
-    .audience-section {
-      background: var(--milk);
-    }
-
-    .audience-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-      margin-top: 28px;
-    }
-
-    .audience-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 28px;
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.6;
-    }
-
     details {
       background: var(--paper);
       border: 1px solid var(--line);
@@ -1157,6 +1138,10 @@
         grid-template-columns: 1fr;
       }
 
+      .check-illustration {
+        width: min(180px, 62vw);
+      }
+
       .hero {
         min-height: auto;
       }
@@ -1170,7 +1155,6 @@
       }
 
       .symptoms,
-      .audience-list,
       .prepare,
       .process-copy,
       .reviews-grid {
@@ -1230,6 +1214,7 @@
     <section class="check-in">
       <div class="wrap">
         <div class="check-card">
+          <img class="check-illustration" src="assets/questionnaire-illustration-transparent.png" alt="Иллюстрация опросника с карандашом">
           <div>
             <h2>Опрос на 1 минуту</h2>
             <p>Узнать, где у вас сейчас больше напряжения: в тоске по дому, ощущении потери опоры или контакте с местными жителями страны. Бесплатно, и без переходов в телеграм.</p>
@@ -1282,7 +1267,7 @@
               <img class="avatar kate-avatar" src="https://optim.tildacdn.net/tild3664-6664-4338-b264-383039633663/-/cover/700x700/center/center/-/format/webp/Screenshot_2025-11-1.png.webp" alt="">
               <div>
                 <h3>Катерина Рахманова</h3>
-                <div class="role">психотерапевт интегрального метода работы</div>
+                <div class="role">психотерапевт, MSc Psychology (University of London)</div>
               </div>
             </div>
             <p>Я многократно переезжала (Москва-Киев-Берлин-Лондон), поэтому понимаю сложности эмигрантов и со всеми из них сталкивалась самостоятельно. Отсюда и стартовал наш проект, с желанием помочь другим людям пройти этот путь легче.</p>
@@ -1335,21 +1320,16 @@
       </div>
     </section>
 
-    <section class="audience-section">
-      <div class="wrap">
-        <h2>Кому подойдет сессия</h2>
-        <div class="audience-list">
-          <div class="audience-card">Тем, кто столкнулся с эмиграцией или беженством, и ощущает какие-то сложности. Это может быть тоска по родному городу, ностальгия, грусть, сложности в адаптации в новом месте, раздражение на людей вокруг, одиночество, злость, отторжение, непринятие, томительное ожидание. Эти эмоции могут появляться эпизодически, не постоянно, но всё равно негативно влиять на качество жизни.</div>
-          <div class="audience-card">Тем, кто хочет испытать EMDR метод на себе, интересуется этим подходом, хочет попробовать, как это ощущается.</div>
-        </div>
-      </div>
-    </section>
-
     <section>
       <div class="wrap faq">
         <details open>
           <summary>Как проходит сессия?</summary>
           <p>Вы подключаетесь к зуму, и начинается работа. Вам не нужно ничего рассказывать, вы можете быть анонимны, с выключенной камерой. Вы можете писать в чат и задавать вопросы, при желании. Это групповая работа над индивидуальными запросами. То есть мы находимся вместе, но каждый работает с собой над своими процессами.</p>
+        </details>
+        <details>
+          <summary>Кому это подходит?</summary>
+          <p>Тем, кто столкнулся с эмиграцией или беженством, и ощущает какие-то сложности. Это может быть тоска по родному городу, ностальгия, грусть, сложности в адаптации в новом месте, раздражение на людей вокруг, одиночество, злость, отторжение, непринятие, томительное ожидание. Эти эмоции могут появляться эпизодически, не постоянно, но всё равно негативно влиять на качество жизни.</p>
+          <p>Тем, кто хочет испытать EMDR метод на себе, интересуется этим подходом, хочет попробовать, как это ощущается.</p>
         </details>
         <details>
           <summary>Что нужно иметь с собой?</summary>
