@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Правила терапии</title>
+    <style>
+      :root {
+        --milk: #f8f2e8;
+        --paper: #fffaf2;
+        --sage: #788a68;
+        --sage-soft: #e8eee2;
+        --clay: #c87557;
+        --clay-soft: #f1d8ca;
+        --ink: #2d2b28;
+        --muted: #6f6962;
+        --line: #ded3c5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--milk);
+        color: var(--ink);
+        font-family: TildaSans, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        line-height: 1.55;
+      }
+
+      .page {
+        min-height: 100vh;
+      }
+
+      .wrap {
+        width: min(1040px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .hero {
+        padding: 46px 0 34px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(120deg, rgba(232, 238, 226, .72), rgba(248, 242, 232, 0) 62%);
+      }
+
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 36px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        color: var(--ink);
+      }
+
+      .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--sage);
+        color: var(--paper);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: 34px;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        max-width: 760px;
+        font-size: clamp(36px, 5vw, 60px);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 680px;
+        color: var(--muted);
+        font-size: clamp(19px, 2vw, 24px);
+      }
+
+      .hero-art {
+        min-height: 260px;
+        background: url("assets/hero-emigrant-transparent.png") center / contain no-repeat;
+      }
+
+      .rules {
+        padding: 42px 0 70px;
+      }
+
+      .rules-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .rule-card,
+      .confirm-panel,
+      .done-panel {
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        background: var(--paper);
+        box-shadow: 0 12px 34px rgba(67, 56, 42, .05);
+      }
+
+      .rule-card {
+        padding: 22px;
+      }
+
+      .rule-card h2 {
+        margin: 0 0 8px;
+        font-size: clamp(22px, 2.4vw, 28px);
+        line-height: 1.16;
+      }
+
+      .rule-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .confirm-panel {
+        margin-top: 22px;
+        padding: clamp(22px, 3vw, 32px);
+      }
+
+      .confirm-panel h2,
+      .done-panel h2 {
+        margin: 0 0 12px;
+        font-size: clamp(26px, 3.4vw, 40px);
+        line-height: 1.1;
+      }
+
+      .checks {
+        display: grid;
+        gap: 12px;
+        margin: 20px 0 24px;
+      }
+
+      .check {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 12px;
+        align-items: start;
+        padding: 15px 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fffdf7;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .check input {
+        width: 22px;
+        height: 22px;
+        margin: 2px 0 0;
+        accent-color: var(--clay);
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .button {
+        min-height: 56px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 999px;
+        padding: 0 26px;
+        background: var(--clay);
+        color: white;
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 14px 36px rgba(151, 79, 55, .22);
+      }
+
+      .button:disabled {
+        opacity: .44;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--sage);
+        border: 1px solid rgba(120, 138, 104, .45);
+        box-shadow: none;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .done-panel {
+        display: none;
+        margin-top: 22px;
+        padding: clamp(22px, 3vw, 32px);
+        background: linear-gradient(135deg, #fffaf2, #e8eee2);
+      }
+
+      .done-panel.is-visible {
+        display: block;
+      }
+
+      .done-panel p {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .copy-box {
+        margin: 0 0 18px;
+        padding: 16px 18px;
+        border-left: 5px solid var(--clay);
+        border-radius: 18px;
+        background: rgba(255, 250, 242, .78);
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      @media (max-width: 780px) {
+        .topline,
+        .hero-grid,
+        .rules-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .topline {
+          align-items: flex-start;
+        }
+
+        .hero-art {
+          min-height: 190px;
+          background-position: left center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div class="wrap">
+          <div class="topline">
+            <div class="brand"><span class="mark">✓</span> Правила терапии</div>
+            <div>2 минуты / 4 подтверждения</div>
+          </div>
+          <div class="hero-grid">
+            <div>
+              <h1>Пожалуйста, прочитайте перед началом работы</h1>
+              <p class="lead">Это короткая рамка, которая помогает терапии быть регулярной, безопасной и понятной для нас обеих.</p>
+            </div>
+            <div class="hero-art" role="img" aria-label="Иллюстрация терапевтической анкеты"></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="rules">
+        <div class="wrap">
+          <div class="rules-grid">
+            <article class="rule-card">
+              <h2>Регулярность</h2>
+              <p>Обычно мы встречаемся раз в неделю в выбранное время, если отдельно не договорились иначе.</p>
+            </article>
+            <article class="rule-card">
+              <h2>Переносы</h2>
+              <p>Перенос возможен бесплатно за 24 часа и раньше. Если меньше чем за 24 часа, сессия оплачивается полностью.</p>
+            </article>
+            <article class="rule-card">
+              <h2>Завершение</h2>
+              <p>Если вы хотите завершить терапию, пожалуйста, скажите заранее. Последняя сессия нужна, чтобы подвести итоги и аккуратно закрыть процесс; она будет на 50% дешевле.</p>
+            </article>
+            <article class="rule-card">
+              <h2>Конфиденциальность</h2>
+              <p>Все, что происходит на сессиях, остается между нами. Записи не ведутся. В супервизии я обсуждаю только профессиональную сторону процесса, без имени и узнаваемых деталей.</p>
+            </article>
+            <article class="rule-card">
+              <h2>Безопасность</h2>
+              <p>Конфиденциальность может иметь ограничения только при прямой угрозе жизни или в ситуациях, где закон требует вмешательства.</p>
+            </article>
+            <article class="rule-card">
+              <h2>Между сессиями</h2>
+              <p>В переписке лучше решать организационные вопросы. Если состояние срочное или небезопасное, пожалуйста, обращайтесь в экстренную службу или кризисную поддержку.</p>
+            </article>
+          </div>
+
+          <section class="confirm-panel" aria-label="Подтверждение правил">
+            <h2>Подтверждение</h2>
+            <div class="checks">
+              <label class="check">
+                <input type="checkbox" />
+                <span>Я понимаю, что терапия обычно проходит регулярно, раз в неделю в выбранное время.</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" />
+                <span>Я понимаю правило переноса: меньше чем за 24 часа сессия оплачивается полностью.</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" />
+                <span>Я понимаю, что завершение лучше обсудить заранее и провести последнюю сессию.</span>
+              </label>
+              <label class="check">
+                <input type="checkbox" />
+                <span>Я понимаю правила конфиденциальности, супервизии и исключения, связанные с безопасностью.</span>
+              </label>
+            </div>
+            <div class="button-row">
+              <button class="button" id="confirmButton" type="button" disabled>Я прочитал(а) и понимаю</button>
+              <span class="hint" id="hint">Отметьте все пункты, чтобы продолжить.</span>
+            </div>
+          </section>
+
+          <section class="done-panel" id="donePanel" aria-live="polite">
+            <h2>Спасибо, подтверждение готово</h2>
+            <p>Можно сделать скриншот этого блока или скопировать текст ниже.</p>
+            <div class="copy-box" id="copyText">Я прочитал(а) правила терапии и понимаю условия регулярности, переносов, завершения и конфиденциальности.</div>
+            <button class="button secondary" id="copyButton" type="button">Скопировать текст</button>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const checks = [...document.querySelectorAll('.check input')];
+      const confirmButton = document.querySelector('#confirmButton');
+      const hint = document.querySelector('#hint');
+      const donePanel = document.querySelector('#donePanel');
+      const copyButton = document.querySelector('#copyButton');
+      const copyText = document.querySelector('#copyText');
+
+      function updateState() {
+        const allChecked = checks.every((check) => check.checked);
+        confirmButton.disabled = !allChecked;
+        hint.textContent = allChecked ? 'Все пункты отмечены.' : 'Отметьте все пункты, чтобы продолжить.';
+      }
+
+      checks.forEach((check) => check.addEventListener('change', updateState));
+
+      confirmButton.addEventListener('click', () => {
+        donePanel.classList.add('is-visible');
+        donePanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      copyButton.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(copyText.textContent);
+          copyButton.textContent = 'Скопировано';
+        } catch {
+          copyButton.textContent = 'Выделите и скопируйте текст';
+        }
+      });
+
+      updateState();
+    </script>
+  </body>
+</html>
